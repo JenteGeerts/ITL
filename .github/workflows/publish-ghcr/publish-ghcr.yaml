@@ -9,6 +9,7 @@ jobs:
         steps:
          - uses: actions/checkout@v3
          - name: Build and push the image
+            
             run: |
                 docker login --username jentegeerts --password ${{ secrets.GH_PAT }} ghcr.io
                 docker build . --tag ghcr.io/jentegeerts/hello-world-ghcr:latest
