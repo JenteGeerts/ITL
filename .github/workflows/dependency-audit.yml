@@ -1,0 +1,30 @@
+name: Dependency audit
+
+on:
+  push:
+    branches:
+      - main
+      - backup/local-checkpoints
+  schedule:
+    - cron: "00 6 * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7 # v7.0.0
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7 # v7.0.0
+        with:
+          node-version-file: .node-version
+          package-manager-cache: false
+      - uses: pnpm/action-setup@v6 # v6.0.0
+        with:
+          run_install: false
+      - name: Audit workspace dependencies
+        run: pnpm audit --audit-level low
