@@ -5,8 +5,8 @@ on:
     branches:
       - main
       - backup/local-checkpoints
-  schedule:
-    - cron: "00 6 * * *"
+  #schedule:
+  #  - cron: "00 6 * * *"
 
 permissions:
   contents: read
